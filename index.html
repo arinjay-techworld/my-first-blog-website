@@ -1,39 +1,122 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website in my life</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #eaf4ff;
-            padding: 50px 20px;
-        }
-
-        h1 {
-            color: #1756a9;
-        }
-
-        button {
-            background: #1756a9;
-            color: white;
-            padding: 12px 22px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-    </style>
+    <meta name="theme-color" content="#f4f1e9">
+    <title>MyBlog — Ideas Worth Sharing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Welcome to My Website!</h1>
+    <header class="site-header">
+        <a class="brand" href="#home" aria-label="MyBlog home">MYBLOG<span>.</span></a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a class="nav-link active" href="#home" data-view="home">Discover</a>
+            <a class="nav-link" href="#articles" data-view="articles">Stories</a>
+            <a class="nav-link" href="#write" data-view="write">Write</a>
+        </nav>
+        <div class="header-actions">
+            <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
+            </button>
+            <button class="admin-link" id="admin-open" type="button"><span class="admin-dot"></span> Dashboard</button>
+        </div>
+    </header>
 
-    <p>This is my first website created using HTML and CSS.</p>
+    <main id="home">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow"><span class="live-dot"></span> A LITTLE CURIOSITY GOES A LONG WAY</p>
+                <h1 id="hero-title">Ideas worth<br><em>passing on.</em></h1>
+                <p class="hero-intro">Good stories make the world feel bigger. Find your next interesting read, or add a thought of your own.</p>
+                <a class="text-link" href="#articles">Explore the latest <span aria-hidden="true">↘</span></a>
+                <div class="hero-note"><span class="note-line"></span><span>INDEPENDENT IDEAS, SHARED DAILY</span></div>
+            </div>
+            <a class="feature-story" href="#articles" data-feature-link aria-label="Read the featured article">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85" alt="Circuit board with a glowing microchip">
+                <span class="feature-shade"></span>
+                <span class="feature-top"><span class="category-label">EDITOR'S PICK</span><span class="feature-index">01 / 04</span></span>
+                <span class="feature-bottom"><span class="feature-category">TECHNOLOGY · 6 MIN READ</span><strong>Our lives are being redesigned. Who gets a say?</strong><span class="feature-byline">A thoughtful look at the tools shaping tomorrow.</span></span>
+                <span class="feature-arrow" aria-hidden="true">↗</span>
+            </a>
+        </section>
 
-    <button onclick="alert('Welcome!')">
-        Click Me
-    </button>
+        <section class="topic-strip" aria-label="Browse by category">
+            <span class="topic-label">FIND YOUR SUBJECT</span>
+            <div class="topic-list" id="topic-list">
+                <button class="topic-chip selected" type="button" data-category="All">All stories <span>↗</span></button>
+                <button class="topic-chip" type="button" data-category="Technology">Technology</button>
+                <button class="topic-chip" type="button" data-category="Gaming">Gaming</button>
+                <button class="topic-chip" type="button" data-category="Education">Education</button>
+                <button class="topic-chip" type="button" data-category="Travel">Travel</button>
+                <button class="topic-chip" type="button" data-category="Lifestyle">Lifestyle</button>
+            </div>
+        </section>
+
+        <section class="articles section-shell" id="articles" aria-labelledby="articles-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">THE READING ROOM <span class="heading-rule"></span></p>
+                    <h2 id="articles-title">Stories to stay<br class="mobile-break"> curious about<span>.</span></h2>
+                </div>
+                <div class="article-controls">
+                    <label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg><input id="search" type="search" placeholder="Search stories" aria-label="Search by article title"></label>
+                    <label class="sort-control"><span class="sr-only">Sort stories</span><select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label>
+                </div>
+            </div>
+            <div class="result-meta"><span id="result-count"></span><button class="saved-filter" type="button" id="saved-filter" aria-pressed="false"><span aria-hidden="true">♧</span> Saved stories</button></div>
+            <div id="post-list" class="post-grid"></div>
+            <p id="empty-message" class="empty-message" hidden>No stories match that search. Try another title or category.</p>
+        </section>
+
+        <section class="write-band" id="write" aria-labelledby="write-title">
+            <div class="write-intro">
+                <p class="eyebrow">YOUR TURN TO ADD A PAGE</p>
+                <h2 id="write-title">Every good idea<br>starts somewhere<span>.</span></h2>
+                <p>Draft a story, give it a home, and share it with curious people.</p>
+                <div class="write-aside"><span class="write-aside-mark">✳</span><span>Your drafts stay in this browser. No account needed.</span></div>
+            </div>
+            <form id="post-form" class="post-form">
+                <div class="form-topline"><span>NEW STORY</span><span>01 — 03</span></div>
+                <label for="post-title">Give it a title</label>
+                <input id="post-title" type="text" maxlength="100" required placeholder="A title people will remember">
+                <div class="form-row">
+                    <div class="field-group"><label for="post-category">Choose a subject</label><select id="post-category"><option>Technology</option><option>Gaming</option><option>Education</option><option>Travel</option><option>Lifestyle</option><option>Other</option></select></div>
+                    <div class="field-group"><label for="post-author">Byline</label><input id="post-author" type="text" maxlength="40" placeholder="Your name"></div>
+                </div>
+                <label for="post-content">Your article</label>
+                <textarea id="post-content" rows="7" maxlength="5000" required placeholder="Start with the thought you can't stop thinking about..."></textarea>
+                <div class="form-footer"><span id="word-count">0 / 5000 characters</span><button class="button-dark" type="submit">Publish story <span aria-hidden="true">↗</span></button></div>
+                <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="dashboard section-shell" id="dashboard" hidden aria-labelledby="dashboard-title">
+            <div class="dashboard-heading"><div><p class="eyebrow">YOUR LOCAL EDITION</p><h2 id="dashboard-title">Publisher dashboard<span>.</span></h2><p class="dashboard-description">Manage the stories saved in this browser.</p></div><button class="close-dashboard" id="dashboard-close" type="button" aria-label="Close dashboard">×</button></div>
+            <div class="stats-grid"><div class="stat"><span>STORIES</span><strong id="stat-posts">0</strong></div><div class="stat"><span>BOOKMARKS</span><strong id="stat-saved">0</strong></div><div class="stat"><span>COMMENTS</span><strong id="stat-comments">0</strong></div><div class="stat"><span>REACTIONS</span><strong id="stat-reactions">0</strong></div></div>
+            <div class="dashboard-table-wrap"><table class="dashboard-table"><thead><tr><th>Story</th><th>Category</th><th>Published</th><th>Reading time</th><th></th></tr></thead><tbody id="dashboard-posts"></tbody></table></div>
+            <p class="dashboard-footnote">This is a browser-only demo. For a shared publication, authentication, or cross-device sync, connect a backend.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer"><a class="brand" href="#home">MYBLOG<span>.</span></a><p>A small place for big thoughts.</p><span>© 2026 MYBLOG · MADE WITH CURIOSITY</span></footer>
+
+    <button class="assistant-launcher" id="assistant-launcher" type="button" aria-expanded="false" aria-controls="assistant-panel"><span class="assistant-spark">✳</span><span>Writing desk</span></button>
+    <aside class="assistant-panel" id="assistant-panel" aria-labelledby="assistant-title" hidden>
+        <div class="assistant-head"><div><p class="eyebrow">YOUR OFFLINE WRITING PARTNER</p><h2 id="assistant-title">The writing desk</h2></div><button class="assistant-close" id="assistant-close" type="button" aria-label="Close writing desk">×</button></div>
+        <p class="assistant-note">Choose a tool and I’ll work with the draft in your editor. This demo runs locally and does not send your writing anywhere.</p>
+        <div class="assistant-actions"><button type="button" data-assistant="improve">Polish my draft <span>↗</span></button><button type="button" data-assistant="ideas">Suggest story ideas <span>↗</span></button><button type="button" data-assistant="features">Suggest a blog feature <span>↗</span></button></div>
+        <div class="assistant-output" id="assistant-output" aria-live="polite">Your suggestions will show up here.</div>
+        <label class="assistant-label" for="assistant-question">Ask for a writing nudge</label><div class="assistant-input-row"><input id="assistant-question" type="text" placeholder="What are you working on?"><button id="assistant-ask" type="button" aria-label="Get a writing nudge">↗</button></div>
+    </aside>
+
+    <dialog class="article-dialog" id="article-dialog" aria-labelledby="dialog-title">
+        <button class="dialog-close" id="dialog-close" type="button" aria-label="Close article">×</button>
+        <div id="dialog-content"></div>
+    </dialog>
 </body>
 </html>
